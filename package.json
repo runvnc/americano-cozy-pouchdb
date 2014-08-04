@@ -1,5 +1,5 @@
 {
-  "name": "americano-cozy-pouchb",
+  "name": "americano-cozy-pouchdb",
   "version": "0.3.0",
   "description": "Americano helpers to build Cozy applications faster with PouchDB",
   "author": "Cozy Cloud <contact@cozycloud.cc> (http://cozycloud.cc)",
