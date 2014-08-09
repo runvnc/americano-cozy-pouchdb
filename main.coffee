@@ -67,13 +67,14 @@ db = null
 
 # Plugin configuration: run through models/requests.(coffee|js) and save
 # them all in the Cozy Data System.
-module.exports.configure = (root, app, callback) ->
-    if app.db?
+module.exports.configure = (options, app, callback) ->
+    root = options.root
+    if options.db?
         module.exports.db = db = new Schema 'pouchdb-adapter',
-            db: app.db
-    else if app.dbName?
+            db: options.db
+    else if options.dbName?
         module.exports.db = db = new Schema 'pouchdb-adapter',
-            dbName: app.dbName
+            dbName: options.dbName
     else
         module.exports.db = db = new Schema 'pouchdb-adapter', {}
 
