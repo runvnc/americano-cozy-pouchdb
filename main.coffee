@@ -63,9 +63,20 @@ _loadRequestCreators = (root, models, requests) ->
     requestsToSave
 
 
+db = null
+
 # Plugin configuration: run through models/requests.(coffee|js) and save
 # them all in the Cozy Data System.
 module.exports.configure = (root, app, callback) ->
+    if app.db?
+        module.exports.db = db = new Schema 'pouchdb-adapter',
+            db: app.db
+    else id app.dbName
+        module.exports.db = db = new Schema 'pouchdb-adapter',
+            dbName: app.dbName
+    else
+        module.exports.db = db = new Schema 'pouchdb-adapter', {}
+
     try
         requests = require "#{root}/server/models/requests"
     catch err
@@ -87,7 +98,6 @@ module.exports.configure = (root, app, callback) ->
 # Wraps JugglingDB stuff and configuration.
 Schema = require('jugglingdb').Schema
 
-module.exports.db = db = new Schema 'pouchdb-adapter', {}
 
 # Helpers to make it easier to build a model.
 module.exports.getModel = (name, fields) ->
