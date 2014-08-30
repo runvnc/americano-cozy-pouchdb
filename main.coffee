@@ -23,13 +23,14 @@ _saveRequest = (models, request, callback) ->
     docType = request.docType
     requestName = request.name
     docRequest = request.docRequest
-    log.info "#{docType} - #{requestName} request creation..."
+    log.info "#{docType} - #{requestName} request creation..." unless silent
     models[docType].defineRequest(
         requestName,
         docRequest,
         (err) ->
-            if err then log.error "failed #{err}"
-            else log.info "succeeded"
+            unless silent
+                if err then log.error "failed #{err}"
+                else log.info "succeeded"
             callback err
     )
 
@@ -64,11 +65,13 @@ _loadRequestCreators = (root, models, requests) ->
 
 
 db = null
+silent = false
 
 # Plugin configuration: run through models/requests.(coffee|js) and save
 # them all in the Cozy Data System.
 module.exports.configure = (options, app, callback) ->
     root = options.root
+    silent = options.silent if options.silent
     if options.db?
         module.exports.db = db = new Schema 'pouchdb-adapter',
             db: options.db
