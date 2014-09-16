@@ -10,6 +10,7 @@ log = require('printit')
     date: true
     prefix: 'americano-cozy'
 
+
 # Require all the models for which a request is written
 _loadModels = (root, requests) ->
     models = []
@@ -95,7 +96,7 @@ module.exports.configure = (options, app, callback) ->
             console.log err
             callback err if callback?
         else
-            log.info "All requests have been created"
+            log.info "All requests have been created" unless silent
             callback() if callback?
 
 
