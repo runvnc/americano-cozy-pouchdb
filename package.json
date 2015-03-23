@@ -1,8 +1,8 @@
 {
-  "name": "americano-cozy-pouchdb",
+  "name": "americano-cozy-pouchdb-multi",
   "version": "0.3.18",
   "description": "Americano helpers to build Cozy applications faster with PouchDB",
-  "author": "Cozy Cloud <contact@cozycloud.cc> (http://cozycloud.cc)",
+  "author": "Cozy Cloud, runvnc (multi)",
   "main": "./main.js",
   "dependencies": {
     "jugglingdb": "0.2.0-41",

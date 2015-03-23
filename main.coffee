@@ -10,7 +10,6 @@ log = require('printit')
     date: true
     prefix: 'americano-cozy'
 
-
 # Require all the models for which a request is written
 _loadModels = (root, requests) ->
     models = []
@@ -107,6 +106,9 @@ Schema = require('jugglingdb').Schema
 # Helpers to make it easier to build a model.
 module.exports.getModel = (name, fields) ->
     fields.id = String
+    console.log "global.session is " + global.session
+    if global.session? and global.session?.dbname?
+      name = "#{global.session.dbname}_#{name}"
     model = db.define name, fields
     model
 
